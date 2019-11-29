@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Assignment2</groupId>
+  <artifactId>Assignment2</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+   <packaging>jar</packaging>
+  <name>loggingTutorial</name>
+  <url>http://maven.apache.org</url>
+
+ <dependencies>
+    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+	<dependency>
+    	<groupId>log4j</groupId>
+    	<artifactId>log4j</artifactId>
+    	<version>1.2.17</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+	<dependency>
+    	<groupId>org.apache.velocity</groupId>
+    	<artifactId>velocity</artifactId>
+    	<version>1.7</version>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
+	<dependency>
+    	<groupId>org.junit.platform</groupId>
+    	<artifactId>junit-platform-launcher</artifactId>
+    	<version>1.5.2</version>
+    	<scope>test</scope>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+	<dependency>
+    	<groupId>org.junit.jupiter</groupId>
+    	<artifactId>junit-jupiter-engine</artifactId>
+    	<version>5.5.2</version>
+    	<scope>test</scope>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
+	<dependency>
+    	<groupId>org.junit.vintage</groupId>
+    	<artifactId>junit-vintage-engine</artifactId>
+    	<version>5.5.2</version>
+    	<scope>test</scope>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+	<dependency>
+    	<groupId>org.jacoco</groupId>
+    	<artifactId>jacoco-maven-plugin</artifactId>
+    	<version>0.8.5</version>
+	</dependency>
+  </dependencies>  
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<skipMain>true</skipMain>
+					<skip>true</skip>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>target/jacoco.exec</dataFile>
+							<outputDirectory>target/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+ 
+</project>
